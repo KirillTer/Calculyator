@@ -161,7 +161,7 @@
     if([self.text1.text containsString:self.sign]){
         NSArray *signSepArray = [self.text1.text componentsSeparatedByString:self.sign];
         self.s = [signSepArray lastObject];
-        NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"|"];
+        NSArray *sepArray = [self.s componentsSeparatedByString:@"|"];
         NSInteger a = [[sepArray firstObject] intValue];
         NSInteger b = [[sepArray lastObject] intValue];
         self.secondNumber = [[FirstTask alloc] initWithFir:a Sec:b];
