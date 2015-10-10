@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "244EC11AE0BF272AF9A6EDBD523736E5E80E1E66",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "244EC11AE0BF272AF9A6EDBD523736E5E80E1E66" : 0,
+    "B0D95EAB529376557C0D8C9F1C1D53C2A17E0E53" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1BCF6F4B-855D-4B0E-9C50-5CC47AB3F888",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "244EC11AE0BF272AF9A6EDBD523736E5E80E1E66" : "Calculyator\/",
+    "B0D95EAB529376557C0D8C9F1C1D53C2A17E0E53" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Calculyator",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Calculyator.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/KirillTer\/Calculyator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "244EC11AE0BF272AF9A6EDBD523736E5E80E1E66"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/KirillTer\/iOS-Projects.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B0D95EAB529376557C0D8C9F1C1D53C2A17E0E53"
+    }
+  ]
+}
