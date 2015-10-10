@@ -128,32 +128,48 @@
     self.sign = @"+";
     NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"|"];
     NSInteger a = [[sepArray firstObject] intValue];
-    NSInteger b = [[sepArray lastObject] intValue];
-    self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    if (![self.text1.text containsString:@"|"]) {
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:1];
+    }else{
+        NSInteger b = [[sepArray lastObject] intValue];
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    }
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"+" ];
 }
 - (IBAction)buttonSub:(id)sender{
     self.sign = @"-";
     NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"|"];
     NSInteger a = [[sepArray firstObject] intValue];
-    NSInteger b = [[sepArray lastObject] intValue];
-    self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    if (![self.text1.text containsString:@"|"]) {
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:1];
+    }else{
+        NSInteger b = [[sepArray lastObject] intValue];
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    }
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"-" ];
 }
 - (IBAction)buttonMult:(id)sender{
     self.sign = @"*";
     NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"|"];
     NSInteger a = [[sepArray firstObject] intValue];
-    NSInteger b = [[sepArray lastObject] intValue];
-    self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    if (![self.text1.text containsString:@"|"]) {
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:1];
+    }else{
+        NSInteger b = [[sepArray lastObject] intValue];
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    }
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"*" ];
 }
 - (IBAction)buttonDevide:(id)sender{
     self.sign = @"/";
     NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"|"];
     NSInteger a = [[sepArray firstObject] intValue];
-    NSInteger b = [[sepArray lastObject] intValue];
-    self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    if (![self.text1.text containsString:@"|"]) {
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:1];
+    }else{
+        NSInteger b = [[sepArray lastObject] intValue];
+        self.firstNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+    }
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"/" ];
 }
 //Result
@@ -163,8 +179,12 @@
         self.s = [signSepArray lastObject];
         NSArray *sepArray = [self.s componentsSeparatedByString:@"|"];
         NSInteger a = [[sepArray firstObject] intValue];
-        NSInteger b = [[sepArray lastObject] intValue];
-        self.secondNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+        if (![self.s containsString:@"|"]) {
+            self.secondNumber = [[FirstTask alloc] initWithFir:a Sec:1];
+        }else{
+            NSInteger b = [[sepArray lastObject] intValue];
+            self.secondNumber = [[FirstTask alloc] initWithFir:a Sec:b];
+        }
     }
     if([self.sign isEqual:@"+"]){
         self.text1.text = [self.firstNumber summ:self.secondNumber];
