@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *Label1;
+- (IBAction)save:(id)sender;
+- (IBAction)save:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *text1;
 @property (weak, nonatomic) IBOutlet UIButton *Clean;
 @property (weak, nonatomic) IBOutlet UIButton *button0;
@@ -177,4 +179,5 @@
         self.text1.text = [NSString stringWithFormat:@"%d",(int)roundf([self.text1.text floatValue])];
     }
 }
+
 @end
