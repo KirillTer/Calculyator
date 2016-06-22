@@ -7,11 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "CalcBrain.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *Label1;
-- (IBAction)save:(id)sender;
-- (IBAction)save:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *text1;
 @property (weak, nonatomic) IBOutlet UIButton *Clean;
 @property (weak, nonatomic) IBOutlet UIButton *button0;
@@ -31,13 +30,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonDevide;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPoint;
 @property (weak, nonatomic) IBOutlet UIButton *buttonSign;
-@property (weak, nonatomic) IBOutlet UIButton *buttonPolinom;
-@property (weak, nonatomic) IBOutlet UIButton *buttonMatrix;
+@property (weak, nonatomic) IBOutlet UIButton *buttonScobeOpen;
+@property (weak, nonatomic) IBOutlet UIButton *buttonScobeClose;
 
 @property (strong, nonatomic) NSString* s;
 @property (strong, nonatomic) NSString* sign;
-@property (assign, nonatomic) float a;
-@property (assign, nonatomic) float b;
+@property (assign, nonatomic) double a;
+@property (assign, nonatomic) double b;
 
 @end
 
@@ -45,25 +44,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        self.text1.text = @"0";
+    self.text1.text = @"0";
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+- (IBAction)buttonScobeOpen:(id)sender{
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
+        self.text1.text = @"";
+    }
+    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"(" ];
+}
+- (IBAction)buttonScobeClose:(id)sender{
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
+        self.text1.text = @"";
+    }
+    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @")" ];
 }
 - (IBAction)buttonClean:(id)sender{
     self.text1.text = @"0";
 }
 - (IBAction)button0:(id)sender{
-    if([self.text1.text length] > 0){
+    if(![self.text1.text  isEqual: @"0"]){
         self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"0" ];
     }
 }
 - (IBAction)button1:(id)sender{
-        if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-            self.text1.text = @"";
-        }
-        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"1" ];
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
+        self.text1.text = @"";
+    }
+    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"1" ];
 }
 - (IBAction)button2:(id)sender{
     if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
@@ -113,6 +123,7 @@
     }
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"9" ];
 }
+
 //Sign before number
 - (IBAction)buttonSign:(id)sender{
     if ([self.text1.text hasPrefix:@"-"] && [self.text1.text length] > 1) {
@@ -124,40 +135,43 @@
 }
 //Pointer in float number
 - (IBAction)buttonPointer:(id)sender{
-    if(![self.text1.text containsString:@"."]){
+    if(![self.text1.text containsString:@"."] || ([self.text1.text containsString:@"."] && ([self.text1.text containsString:@"+"] || [self.text1.text containsString:@"-"] || [self.text1.text containsString:@"*"] || [self.text1.text containsString:@"/"]))){
         self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"." ];
     }
 }
 //Operations
 - (IBAction)buttonPlus:(id)sender{
     self.sign = @"+";
-    self.a = [self.text1.text floatValue];
+    self.a = [self.text1.text doubleValue];
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"+" ];
     self.b = 0.0f;
 }
 - (IBAction)buttonSub:(id)sender{
     self.sign = @"-";
-    self.a = [self.text1.text floatValue];
+    self.a = [self.text1.text doubleValue];
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"-"];
     self.b = 0.0f;
 }
 - (IBAction)buttonMult:(id)sender{
     self.sign = @"*";
-    self.a = [self.text1.text floatValue];
+    self.a = [self.text1.text doubleValue];
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"*" ];
     self.b = 0.0f;
 }
 - (IBAction)buttonDevide:(id)sender{
     self.sign = @"/";
-    self.a = [self.text1.text floatValue];
+    self.a = [self.text1.text doubleValue];
     self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"/" ];
     self.b = 0.0f;
 }
 //Result
 - (IBAction)buttonRes:(id)sender{
+    CalcBrain *counter = [[CalcBrain alloc] init];
+    self.text1.text = [NSString stringWithFormat:@"%.2f",[counter countValue:self.text1.text]];
+/*
     if(self.b == 0.0f){
         NSArray *sepArray = [self.text1.text componentsSeparatedByString:self.sign];
-        self.b = [[sepArray lastObject] floatValue];
+        self.b = [[sepArray lastObject] doubleValue];
     }
     if([self.sign isEqual:@"+"]){
         self.text1.text = [NSString stringWithFormat:@"%f",(self.a + self.b)];
@@ -171,13 +185,14 @@
     if([self.sign isEqual:@"/"]){
         self.text1.text = [NSString stringWithFormat:@"%f",(self.a / self.b)];
     }
-    _a = [self.text1.text floatValue];
+    self.a = [self.text1.text doubleValue];
     NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"."];
-    CGFloat rest = [[sepArray lastObject] floatValue];
+    CGFloat rest = [[sepArray lastObject] doubleValue];
     NSLog(@"%f |a = %f |b = %f | %@",rest, _a, _b, _sign);
     if((rest <= 1.0f) || (rest >= 999999.0f)){
         self.text1.text = [NSString stringWithFormat:@"%d",(int)roundf([self.text1.text floatValue])];
     }
+*/
 }
 
 @end
