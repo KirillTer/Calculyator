@@ -16,6 +16,7 @@
 		84F70CA91D13DBE0008216A8 /* CalcBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CA81D13DBE0008216A8 /* CalcBrain.m */; };
 		84F70CAC1D13DD78008216A8 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CAB1D13DD78008216A8 /* Stack.m */; };
 		84F70CAF1D13DE06008216A8 /* CalcRPN.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CAE1D13DE06008216A8 /* CalcRPN.m */; };
+		84F82EFC1D2E8B630079030D /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F82EFB1D2E8B630079030D /* ChartView.m */; };
 		84F87F101D0F4069005A07C2 /* RPN.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F0F1D0F4069005A07C2 /* RPN.m */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 		84F70CAB1D13DD78008216A8 /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stack.m; sourceTree = "<group>"; };
 		84F70CAD1D13DE06008216A8 /* CalcRPN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcRPN.h; sourceTree = "<group>"; };
 		84F70CAE1D13DE06008216A8 /* CalcRPN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcRPN.m; sourceTree = "<group>"; };
+		84F82EFA1D2E8AFF0079030D /* ChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
+		84F82EFB1D2E8B630079030D /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
 		84F87F0E1D0F4069005A07C2 /* RPN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPN.h; sourceTree = "<group>"; };
 		84F87F0F1D0F4069005A07C2 /* RPN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPN.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +97,8 @@
 		84E1A5951BC963AA0006D4FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84F82EFA1D2E8AFF0079030D /* ChartView.h */,
+				84F82EFB1D2E8B630079030D /* ChartView.m */,
 				842E56541BC91DF3000B876F /* ViewController.h */,
 				842E56551BC91DF3000B876F /* ViewController.m */,
 			);
@@ -188,6 +193,7 @@
 				84F70CAC1D13DD78008216A8 /* Stack.m in Sources */,
 				84F87F101D0F4069005A07C2 /* RPN.m in Sources */,
 				842E56561BC91DF3000B876F /* ViewController.m in Sources */,
+				84F82EFC1D2E8B630079030D /* ChartView.m in Sources */,
 				84F70CAF1D13DE06008216A8 /* CalcRPN.m in Sources */,
 				84F70CA91D13DBE0008216A8 /* CalcBrain.m in Sources */,
 				842E56531BC91DF3000B876F /* AppDelegate.m in Sources */,

@@ -7,13 +7,50 @@
 //
 
 #import "CalcRPN.h"
+#import "RPN.h"
 
 @implementation CalcRPN
 
-- (double)countUsingRPN:(NSMutableArray *)incomeRPNString {
-    NSLog(@"incomeRPNString - %@",incomeRPNString);
-    
-    return 42.0;
+- (NSString*)countUsingRPN:(NSString *)incomeString {
+    RPN *stringRPN = [[RPN alloc] init];
+    NSMutableArray *incomeRPNString = [stringRPN convertToRPN:incomeString];
+    if (([incomeRPNString count] <= 2) && ([incomeRPNString count] > 1)) {
+        return @"Incorrect number arguments";
+    } else {
+        for(int i = 0; i < [incomeRPNString count]; i++) {
+            NSString *sign = [NSString stringWithFormat:@"%@", [incomeRPNString objectAtIndex:i]];
+            if([sign isEqual:@"+"]){
+                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-1] doubleValue] + [incomeRPNString[i-2] doubleValue])]];
+                [incomeRPNString removeObjectAtIndex:(i-1)];
+                [incomeRPNString removeObjectAtIndex:(i-2)];
+                i = 1;
+            }
+            if([sign isEqual:@"-"]){
+                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-2] doubleValue] - [incomeRPNString[i-1] doubleValue])]];
+                [incomeRPNString removeObjectAtIndex:(i-1)];
+                [incomeRPNString removeObjectAtIndex:(i-2)];
+                i = 1;
+            }
+            if([sign isEqual:@"*"]){
+                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-1] doubleValue] * [incomeRPNString[i-2] doubleValue])]];
+                [incomeRPNString removeObjectAtIndex:(i-1)];
+                [incomeRPNString removeObjectAtIndex:(i-2)];
+                i = 1;
+            }
+            if([sign isEqual:@"/"]){
+                if (!([incomeRPNString[i-1] isEqualToString:@"0"])) {
+                    [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-2] doubleValue] / [incomeRPNString[i-1] doubleValue])]];
+                    [incomeRPNString removeObjectAtIndex:(i-1)];
+                    [incomeRPNString removeObjectAtIndex:(i-2)];
+                    i = 1;
+                } else {
+                    [incomeRPNString replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%@",@"devision by zero"]];
+                }
+            }
+            NSLog(@"Calculated incomeRPNString - %@",incomeRPNString);
+        }
+    }
+    return incomeRPNString[0];
 }
 
 @end

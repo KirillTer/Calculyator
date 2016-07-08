@@ -10,12 +10,8 @@
 
 @interface Stack : NSObject
 
-@property (assign,readonly) long count;
-
--(void)push:(id)anObject;
--(id)compare;
--(id)pop;
--(void)clear;
--(id)lastObject;
+-(NSMutableArray*)push:(NSString*)anObject;
+-(NSMutableArray*)compare:(NSString*)lastObject;
+-(NSMutableArray*)popAll;
 
 @end

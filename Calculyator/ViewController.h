@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChartView.h"
 
 @interface ViewController : UIViewController
 

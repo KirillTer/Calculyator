@@ -10,6 +10,6 @@
 
 @interface CalcRPN : NSObject
 
-- (double)countUsingRPN:(NSMutableArray *)incomeRPNString;
+- (NSString*)countUsingRPN:(NSString *)incomeRPNString;
 
 @end

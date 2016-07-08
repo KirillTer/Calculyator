@@ -10,6 +10,11 @@
 #import "CalcBrain.h"
 
 @interface ViewController ()
+@property (strong, nonatomic)UIBezierPath *bezPath;
+@property (weak, nonatomic) IBOutlet ChartView *chartView;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIButton *funcButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *Label1;
 @property (weak, nonatomic) IBOutlet UITextField *text1;
 @property (weak, nonatomic) IBOutlet UIButton *Clean;
@@ -33,10 +38,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonScobeOpen;
 @property (weak, nonatomic) IBOutlet UIButton *buttonScobeClose;
 
-@property (strong, nonatomic) NSString* s;
-@property (strong, nonatomic) NSString* sign;
-@property (assign, nonatomic) double a;
-@property (assign, nonatomic) double b;
+@property (strong,nonatomic) NSCharacterSet *charSet;
+@property (strong,nonatomic) NSString *internalString;
+@property (assign,nonatomic) NSInteger *scobeCounter;
 
 @end
 
@@ -44,155 +48,111 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.chartView.hidden = YES;
     self.text1.text = @"0";
+    self.scobeCounter = 0;
+    self.charSet = [NSCharacterSet characterSetWithCharactersInString:@"+-*/"];
+    self.bezPath = [[UIBezierPath alloc] init];
+    [self.bezPath moveToPoint:CGPointMake(0, 0)];
+    [self.bezPath addLineToPoint:CGPointMake(100, 100)];
+    self.chartView.bezPath = self.bezPath;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-- (IBAction)buttonScobeOpen:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"(" ];
-}
-- (IBAction)buttonScobeClose:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @")" ];
+- (IBAction)closeAction:(id)sender {
+    self.chartView.hidden = YES;
 }
 - (IBAction)buttonClean:(id)sender{
     self.text1.text = @"0";
 }
-- (IBAction)button0:(id)sender{
-    if(![self.text1.text  isEqual: @"0"]){
-        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"0" ];
-    }
-}
-- (IBAction)button1:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"1" ];
-}
-- (IBAction)button2:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"2" ];
-}
-- (IBAction)button3:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"3" ];
-}
-- (IBAction)button4:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"4" ];
-}
-- (IBAction)button5:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"5" ];
-}
-- (IBAction)button6:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"6" ];
-}
-- (IBAction)button7:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"7" ];
-}
-- (IBAction)button8:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"8" ];
-}
-- (IBAction)button9:(id)sender{
-    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {
-        self.text1.text = @"";
-    }
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"9" ];
+- (IBAction)funcAction:(id)sender {
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {self.text1.text = @"";}
+    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"X" ];
 }
 
-//Sign before number
+#pragma mark - round scobes
+- (IBAction)buttonScobeOpen:(id)sender {
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {self.text1.text = @"";}
+    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"(" ];
+    self.scobeCounter += 1;
+}
+- (IBAction)buttonScobeClose:(id)sender {
+    if([self.text1.text containsString:@"("]){
+        if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {self.text1.text = @"";}
+        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @")" ];
+        self.scobeCounter -= 1;
+    }
+}
+
+#pragma mark - digits
+- (IBAction)numberPressed:(UIButton*)sender {
+    NSUInteger number = sender.tag;
+    if ([self.text1.text hasPrefix:@"0"] && [self.text1.text length] == 1) {self.text1.text = @"";}
+    self.text1.text = [NSString stringWithFormat:@"%@%lu", self.text1.text, (unsigned long)number ];
+}
+
+#pragma mark - unar minus
 - (IBAction)buttonSign:(id)sender{
+    self.internalString = self.text1.text;
     if ([self.text1.text hasPrefix:@"-"] && [self.text1.text length] > 1) {
         self.text1.text = [self.text1.text substringFromIndex:1];
     }
     else if (![self.text1.text  isEqual: @"0"]){
-        self.text1.text = [NSString stringWithFormat:@"%@%@", @"-", self.text1.text ];
+        self.text1.text = [NSString stringWithFormat:@"%@%@", @"-", self.text1.text];
+        self.internalString = [NSString stringWithFormat:@"%@%@", @"$", self.internalString];
     }
 }
-//Pointer in float number
+
+#pragma mark - pointer in float number
 - (IBAction)buttonPointer:(id)sender{
-    if(![self.text1.text containsString:@"."] || ([self.text1.text containsString:@"."] && ([self.text1.text containsString:@"+"] || [self.text1.text containsString:@"-"] || [self.text1.text containsString:@"*"] || [self.text1.text containsString:@"/"]))){
+    NSString *number = self.text1.text;
+    for(NSUInteger i = [self.text1.text length]-1; i >= 1 ; i--) {
+        //NSLog(@"Char - %@",[NSString stringWithFormat:@"%c", [self.text1.text characterAtIndex:i]]);
+        if (i == [self.text1.text rangeOfCharacterFromSet:self.charSet options:NSBackwardsSearch].location) {
+            number = [self.text1.text substringFromIndex:i];
+            break;
+        }
+    }
+    if(![number containsString:@"."]){
         self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"." ];
     }
 }
-//Operations
+
+#pragma mark - operations
 - (IBAction)buttonPlus:(id)sender{
-    self.sign = @"+";
-    self.a = [self.text1.text doubleValue];
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"+" ];
-    self.b = 0.0f;
+    if (!([self.text1.text length] - 1 == [self.text1.text rangeOfCharacterFromSet:self.charSet options:4].location)) {
+        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"+" ];
+    }
 }
 - (IBAction)buttonSub:(id)sender{
-    self.sign = @"-";
-    self.a = [self.text1.text doubleValue];
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"-"];
-    self.b = 0.0f;
+    if (!([self.text1.text length] - 1 == [self.text1.text rangeOfCharacterFromSet:self.charSet options:4].location)) {
+        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"-"];
+    }
 }
 - (IBAction)buttonMult:(id)sender{
-    self.sign = @"*";
-    self.a = [self.text1.text doubleValue];
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"*" ];
-    self.b = 0.0f;
+    if (!([self.text1.text length] - 1 == [self.text1.text rangeOfCharacterFromSet:self.charSet options:4].location)) {
+        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"*" ];
+    }
 }
 - (IBAction)buttonDevide:(id)sender{
-    self.sign = @"/";
-    self.a = [self.text1.text doubleValue];
-    self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"/" ];
-    self.b = 0.0f;
+    if (!([self.text1.text length] - 1 == [self.text1.text rangeOfCharacterFromSet:self.charSet options:4].location)) {
+        self.text1.text = [NSString stringWithFormat:@"%@%@", self.text1.text, @"/" ];
+    }
 }
-//Result
+
+#pragma mark - result
 - (IBAction)buttonRes:(id)sender{
-    CalcBrain *counter = [[CalcBrain alloc] init];
-    self.text1.text = [NSString stringWithFormat:@"%.2f",[counter countValue:self.text1.text]];
-/*
-    if(self.b == 0.0f){
-        NSArray *sepArray = [self.text1.text componentsSeparatedByString:self.sign];
-        self.b = [[sepArray lastObject] doubleValue];
+    if (!(self.scobeCounter == 0)) {
+        self.text1.text = @"incorrect number of parentheses";
+    } else {
+        self.Label1.text = self.text1.text;
+        CalcBrain *counter = [[CalcBrain alloc] init];
+        self.text1.text = [NSString stringWithFormat:@"%@",[counter countValue:self.text1.text]];
+        if ([self.text1.text containsString:@"X"]) {
+            self.chartView.hidden = NO;
+        }
     }
-    if([self.sign isEqual:@"+"]){
-        self.text1.text = [NSString stringWithFormat:@"%f",(self.a + self.b)];
-    }
-    if([self.sign isEqual:@"-"]){
-        self.text1.text = [NSString stringWithFormat:@"%f",(self.a - self.b)];
-    }
-    if([self.sign isEqual:@"*"]){
-        self.text1.text = [NSString stringWithFormat:@"%f",(self.a * self.b)];
-    }
-    if([self.sign isEqual:@"/"]){
-        self.text1.text = [NSString stringWithFormat:@"%f",(self.a / self.b)];
-    }
-    self.a = [self.text1.text doubleValue];
-    NSArray *sepArray = [self.text1.text componentsSeparatedByString:@"."];
-    CGFloat rest = [[sepArray lastObject] doubleValue];
-    NSLog(@"%f |a = %f |b = %f | %@",rest, _a, _b, _sign);
-    if((rest <= 1.0f) || (rest >= 999999.0f)){
-        self.text1.text = [NSString stringWithFormat:@"%d",(int)roundf([self.text1.text floatValue])];
-    }
-*/
 }
 
 @end

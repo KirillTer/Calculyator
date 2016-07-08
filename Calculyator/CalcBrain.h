@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CalcBrain : NSObject
 
-- (double)countValue:(NSString *)incomeString;
+- (NSString*)countValue:(NSString *)incomeString;
 
 @end

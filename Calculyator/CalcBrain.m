@@ -7,16 +7,28 @@
 //
 
 #import "CalcBrain.h"
-#import "RPN.h"
 #import "CalcRPN.h"
 
 @implementation CalcBrain
 
-- (double)countValue:(NSString *)incomeString {
-    RPN *stringRPN = [[RPN alloc] init];
-    NSMutableArray *tempRPN = [stringRPN convertToRPN:incomeString];
+- (NSString*)countValue:(NSString *)incomeString {
     CalcRPN *calc = [[CalcRPN alloc] init];
-    return [calc countUsingRPN:tempRPN];
+    return [calc countUsingRPN:incomeString];
 }
 
+- (NSMutableArray*)drowGraph:(NSString *)incomeString {
+    NSString *equation = @"x*3+3";
+    NSMutableArray *points = [[NSMutableArray alloc]init];
+    for (CGFloat i = -5; i < 5; i += 0.1) {
+        NSString *expressionString = [equation stringByReplacingOccurrencesOfString:@"x" withString:[NSString stringWithFormat:@"%lf", i]];
+        //////
+        NSExpression *expression = [NSExpression expressionWithFormat:expressionString];
+        //////
+        NSNumber *number = [expression expressionValueWithObject:nil context:nil];
+        NSLog(@"%g", [number doubleValue]);
+        CGPoint point = CGPointMake(i, [number doubleValue]);
+        [points addObject:[NSValue valueWithCGPoint:point]];
+    }
+    return points;
+}
 @end
