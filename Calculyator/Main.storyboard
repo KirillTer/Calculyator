@@ -32,7 +32,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" placeholderIntrinsicWidth="292" placeholderIntrinsicHeight="292" translatesAutoresizingMaskIntoConstraints="NO" id="RVq-0L-vfD" customClass="ChartView">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="RVq-0L-vfD" customClass="ChartView">
                                 <rect key="frame" x="14" y="54" width="292" height="292"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Haw-d7-RYU">
@@ -62,9 +62,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rrf-Ii-gCG">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Rrf-Ii-gCG" secondAttribute="height" multiplier="1:1" id="39W-Ul-I5P"/>
-                                                </constraints>
                                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <state key="normal" title="C"/>
@@ -115,12 +112,14 @@
                                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-6D-TTe">
                                                 <rect key="frame" x="0.0" y="370" width="70" height="70"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="1h8-6D-TTe" secondAttribute="height" multiplier="1:1" id="L1r-W2-hOy"/>
+                                                </constraints>
                                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <state key="normal" title="X"/>
                                                 <connections>
                                                     <action selector="funcAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cPF-ga-JWT"/>
-                                                    <action selector="numberPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W5e-qX-8BN"/>
                                                 </connections>
                                             </button>
                                         </subviews>

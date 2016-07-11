@@ -13,6 +13,7 @@
 		842E565B1BC91DF3000B876F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842E565A1BC91DF3000B876F /* Assets.xcassets */; };
 		842E56671BC91EBE000B876F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842E56651BC91EBE000B876F /* LaunchScreen.storyboard */; };
 		842E56681BC91EBE000B876F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842E56661BC91EBE000B876F /* Main.storyboard */; };
+		8447BA8A1D314BEC000848DD /* BuildGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 8447BA891D314BEC000848DD /* BuildGraph.m */; };
 		84F70CA91D13DBE0008216A8 /* CalcBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CA81D13DBE0008216A8 /* CalcBrain.m */; };
 		84F70CAC1D13DD78008216A8 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CAB1D13DD78008216A8 /* Stack.m */; };
 		84F70CAF1D13DE06008216A8 /* CalcRPN.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F70CAE1D13DE06008216A8 /* CalcRPN.m */; };
@@ -31,6 +32,8 @@
 		842E565F1BC91DF3000B876F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842E56651BC91EBE000B876F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842E56661BC91EBE000B876F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8447BA881D314BEC000848DD /* BuildGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildGraph.h; sourceTree = "<group>"; };
+		8447BA891D314BEC000848DD /* BuildGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildGraph.m; sourceTree = "<group>"; };
 		84F70CA71D13DBE0008216A8 /* CalcBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcBrain.h; sourceTree = "<group>"; };
 		84F70CA81D13DBE0008216A8 /* CalcBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcBrain.m; sourceTree = "<group>"; };
 		84F70CAA1D13DD78008216A8 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 		84E1A5961BC963CF0006D4FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8447BA881D314BEC000848DD /* BuildGraph.h */,
+				8447BA891D314BEC000848DD /* BuildGraph.m */,
 				84F87F0E1D0F4069005A07C2 /* RPN.h */,
 				84F87F0F1D0F4069005A07C2 /* RPN.m */,
 				84F70CA71D13DBE0008216A8 /* CalcBrain.h */,
@@ -197,6 +202,7 @@
 				84F70CAF1D13DE06008216A8 /* CalcRPN.m in Sources */,
 				84F70CA91D13DBE0008216A8 /* CalcBrain.m in Sources */,
 				842E56531BC91DF3000B876F /* AppDelegate.m in Sources */,
+				8447BA8A1D314BEC000848DD /* BuildGraph.m in Sources */,
 				842E56501BC91DF3000B876F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

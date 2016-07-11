@@ -14,8 +14,11 @@
 - (NSString*)countUsingRPN:(NSString *)incomeString {
     RPN *stringRPN = [[RPN alloc] init];
     NSMutableArray *incomeRPNString = [stringRPN convertToRPN:incomeString];
+    for (int i = 0; i < [incomeRPNString count]; i++) {
+        [incomeRPNString replaceObjectAtIndex:i withObject:[[incomeRPNString objectAtIndex:i] stringByReplacingOccurrencesOfString:@"$" withString:@"-"]];
+    }
     if (([incomeRPNString count] <= 2) && ([incomeRPNString count] > 1)) {
-        return @"Incorrect number arguments";
+        return @"Incorrect number of arguments";
     } else {
         for(int i = 0; i < [incomeRPNString count]; i++) {
             NSString *sign = [NSString stringWithFormat:@"%@", [incomeRPNString objectAtIndex:i]];

@@ -13,4 +13,6 @@
 
 - (NSString*)countValue:(NSString *)incomeString;
 
+- (UIBezierPath *)buildChartPathWith:(NSString *)equation forSize:(CGSize)viewSize;
+
 @end

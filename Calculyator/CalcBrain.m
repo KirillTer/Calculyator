@@ -8,6 +8,7 @@
 
 #import "CalcBrain.h"
 #import "CalcRPN.h"
+#import "BuildGraph.h"
 
 @implementation CalcBrain
 
@@ -16,19 +17,9 @@
     return [calc countUsingRPN:incomeString];
 }
 
-- (NSMutableArray*)drowGraph:(NSString *)incomeString {
-    NSString *equation = @"x*3+3";
-    NSMutableArray *points = [[NSMutableArray alloc]init];
-    for (CGFloat i = -5; i < 5; i += 0.1) {
-        NSString *expressionString = [equation stringByReplacingOccurrencesOfString:@"x" withString:[NSString stringWithFormat:@"%lf", i]];
-        //////
-        NSExpression *expression = [NSExpression expressionWithFormat:expressionString];
-        //////
-        NSNumber *number = [expression expressionValueWithObject:nil context:nil];
-        NSLog(@"%g", [number doubleValue]);
-        CGPoint point = CGPointMake(i, [number doubleValue]);
-        [points addObject:[NSValue valueWithCGPoint:point]];
-    }
-    return points;
+- (UIBezierPath *)buildChartPathWith:(NSString *)equation forSize:(CGSize)viewSize {
+    BuildGraph *graph = [[BuildGraph alloc] init];
+    return [graph buildGraphPathWith:equation forSize:viewSize];
 }
+
 @end
