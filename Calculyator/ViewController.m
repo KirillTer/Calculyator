@@ -52,6 +52,7 @@
     [super viewDidLoad];
     self.chartView.hidden = YES;
     self.text1.text = @"0";
+    self.internalString = @"0";
     self.scobeCounter = 0;
     self.number = @"";
     self.charSet = [NSCharacterSet characterSetWithCharactersInString:@"+-*/()"];
@@ -69,6 +70,7 @@
     self.text1.text = @"0";
     self.internalString = @"0";
     self.scobeCounter = 0;
+    self.Label1.text = @"0";
 }
 
 #pragma mark - Drow Graph Button
@@ -125,8 +127,8 @@
         self.text1.text = [NSString stringWithFormat:@"%@%@%@",self.text1.text, @"-", self.number];
         self.internalString = [NSString stringWithFormat:@"%@%@%@",self.internalString, @"$", self.number];
     }
-//    NSLog(@"%@",self.text1.text);
-//    NSLog(@"%@",self.internalString);
+    NSLog(@"%@",self.text1.text);
+    NSLog(@"%@",self.internalString);
 }
 
 #pragma mark - pointer in float number

@@ -17,42 +17,41 @@
     for (int i = 0; i < [incomeRPNString count]; i++) {
         [incomeRPNString replaceObjectAtIndex:i withObject:[[incomeRPNString objectAtIndex:i] stringByReplacingOccurrencesOfString:@"$" withString:@"-"]];
     }
-    if (([incomeRPNString count] <= 2) && ([incomeRPNString count] > 1)) {
-        return @"Incorrect number of arguments";
-    } else {
-        for(int i = 0; i < [incomeRPNString count]; i++) {
-            NSString *sign = [NSString stringWithFormat:@"%@", [incomeRPNString objectAtIndex:i]];
-            if([sign isEqual:@"+"]){
-                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-1] doubleValue] + [incomeRPNString[i-2] doubleValue])]];
+    for(int i = 0; i < [incomeRPNString count]; i++) {
+        NSString *sign = [NSString stringWithFormat:@"%@", [incomeRPNString objectAtIndex:i]];
+        if([sign isEqual:@"+"]){
+            [incomeRPNString replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:([incomeRPNString[i-1] doubleValue] + [incomeRPNString[i-2] doubleValue])]];
+            [incomeRPNString removeObjectAtIndex:(i-1)];
+            [incomeRPNString removeObjectAtIndex:(i-2)];
+            i = 1;
+        }
+        if([sign isEqual:@"-"]){
+            [incomeRPNString replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:([incomeRPNString[i-2] doubleValue] - [incomeRPNString[i-1] doubleValue])]];
+            [incomeRPNString removeObjectAtIndex:(i-1)];
+            [incomeRPNString removeObjectAtIndex:(i-2)];
+            i = 1;
+        }
+        if([sign isEqual:@"*"]){
+            [incomeRPNString replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:([incomeRPNString[i-1] doubleValue] * [incomeRPNString[i-2] doubleValue])]];
+            [incomeRPNString removeObjectAtIndex:(i-1)];
+            [incomeRPNString removeObjectAtIndex:(i-2)];
+            i = 1;
+        }
+        if([sign isEqual:@"/"]){
+            if (!([incomeRPNString[i-1] isEqualToString:@"0"])) {
+                [incomeRPNString replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:([incomeRPNString[i-2] doubleValue] / [incomeRPNString[i-1] doubleValue])]];
                 [incomeRPNString removeObjectAtIndex:(i-1)];
                 [incomeRPNString removeObjectAtIndex:(i-2)];
                 i = 1;
+            } else {
+                [incomeRPNString replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%@",@"devision by zero"]];
             }
-            if([sign isEqual:@"-"]){
-                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-2] doubleValue] - [incomeRPNString[i-1] doubleValue])]];
-                [incomeRPNString removeObjectAtIndex:(i-1)];
-                [incomeRPNString removeObjectAtIndex:(i-2)];
-                i = 1;
-            }
-            if([sign isEqual:@"*"]){
-                [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-1] doubleValue] * [incomeRPNString[i-2] doubleValue])]];
-                [incomeRPNString removeObjectAtIndex:(i-1)];
-                [incomeRPNString removeObjectAtIndex:(i-2)];
-                i = 1;
-            }
-            if([sign isEqual:@"/"]){
-                if (!([incomeRPNString[i-1] isEqualToString:@"0"])) {
-                    [incomeRPNString replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%f",([incomeRPNString[i-2] doubleValue] / [incomeRPNString[i-1] doubleValue])]];
-                    [incomeRPNString removeObjectAtIndex:(i-1)];
-                    [incomeRPNString removeObjectAtIndex:(i-2)];
-                    i = 1;
-                } else {
-                    [incomeRPNString replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%@",@"devision by zero"]];
-                }
-            }
-            NSLog(@"Calculated incomeRPNString - %@",incomeRPNString);
         }
     }
+    if ([incomeRPNString count] > 1) {
+        return @"Incorrect number of operands";
+    }
+    NSLog(@"Calculated incomeRPNString - %@",incomeRPNString);
     return incomeRPNString[0];
 }
 

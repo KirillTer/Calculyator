@@ -24,7 +24,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="70" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="mXm-MX-1jA">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="70" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="mXm-MX-1jA">
                                 <rect key="frame" x="14" y="54" width="292" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0FG-Nh-Kd4"/>

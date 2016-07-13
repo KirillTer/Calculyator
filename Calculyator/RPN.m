@@ -25,13 +25,12 @@
             incomeString = [incomeString substringFromIndex:i];
             NSString *operand = [incomeString substringToIndex:1];
             incomeString = [incomeString substringFromIndex:1];
-            NSMutableArray *tempOperand = [[NSMutableArray alloc] init];
-            tempOperand = [stck push:operand];
-            if (tempOperand) {
+            NSMutableArray *tempOperand = [stck push:operand];
+            if (!([tempOperand count] == 0)) {
                 [outcomeRPNString addObjectsFromArray:tempOperand];
             }
-            //NSLog(@"outcomeRPNString - %@", outcomeRPNString);
-            //NSLog(@"incomeString - %@", incomeString);
+            NSLog(@"outcomeRPNString - %@", outcomeRPNString);
+            NSLog(@"incomeString - %@", incomeString);
             i = -1;
         }
     }
